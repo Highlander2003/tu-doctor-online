@@ -1,0 +1,721 @@
+#Crear Front
+  npx create-react-app profinalmintic --template typescript
+
+#Pegar assets de la carpeta recursos en la carpeta src
+
+#En el archivo src/index.css copiar 02_index_css.txt de la carpeta recursos
+
+#Instalar librerias obligatorias
+  npm i bootstrap
+  npm i bootstrap-icons
+  npm i @fortawesome/fontawesome-free
+  npm i react-router-dom
+  npm i react-bootstrap
+  npm i js-sha512
+  npm i react-toastify
+
+#Incluir en src\index.ts
+  import "bootstrap/dist/css/bootstrap.min.css";
+  import "bootstrap/dist/js/bootstrap.min.js";
+  import "@fortawesome/fontawesome-free/css/all.css";
+  import "bootstrap-icons/font/bootstrap-icons.css";
+  import './index.css';
+
+#Crear carpetas
+  src
+	app
+		contenedores
+		modelos
+		servicios
+		utilidades
+			dominios
+			funciones
+			misHooks
+			rutas
+		vistas
+			compartidas
+			privadas
+				perfiles
+				usuarios
+				productos
+				citas
+			publicas
+
+	assets
+
+# Creacion del modelo para crear usuario src\app\modelos\CrearUsuario.tsx
+  class CrearUsuario {
+    public nombreUsuario: string;
+    public correoUsuario: string;
+    public claveUsuario: string;
+
+    constructor(nom: string, cor: string, cla: string) {
+      this.nombreUsuario = nom;
+      this.correoUsuario = cor;
+      this.claveUsuario = cla;
+    }
+  }
+
+  export default CrearUsuario;
+
+# Creación de Hook para manejo de variables en formularios
+  src\app\utilidades\misHooks\useFormulario.tsx
+
+  import { useState, ChangeEvent } from "react";
+
+  export const useFormulario = <T extends Object>(objetoInicial: T) => {
+    const [objeto, setObjeto] = useState(objetoInicial);
+
+    const dobleEnlace = ({ target }: ChangeEvent<any>) => {
+      const { name, value } = target;
+      setObjeto({ ...objeto, [name]: value });
+    };
+
+    return {
+      objeto,
+      dobleEnlace,
+      ...objeto,
+    };
+  };
+
+# Creación de componentes
+  src\app\vistas\publicas\Principal.tsx
+
+  imports
+    import { Link } from "react-router-dom";
+    import "./../../../assets/css/portada.css";
+    import "./../../../assets/css/carousel.css";
+    import logoReact from "./../../../assets/image/logoReact.png";
+    import quienesSomos from "./../../../assets/image/quienesSomos.png";
+    import patrocinio from "./../../../assets/image/patrocinio.png";
+    import tecnologias from "./../../../assets/image/tecnologias.png";
+    import fondo01 from "./../../../assets/image/fondo01.png";
+    import fondo02 from "./../../../assets/image/fondo02.png";
+    import fondo03 from "./../../../assets/image/fondo03.png";
+    import fondo04 from "./../../../assets/image/fondo04.png";
+
+  export const Principal = () => {
+    return (
+      <div>
+        {/* Barra de navegación: Inicio */}
+        <header>
+          <nav className="navbar navbar-expand-md fixed-top bg-light">
+            <div className="container-fluid">
+            <Link to="/" className="navbar-brand" >
+            <img src={logoReact} alt="" /> Mintic 2022
+            </Link>
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+              <div className="collapse navbar-collapse" id="navbarCollapse">
+                <ul className="navbar-nav me-auto mb-2 mb-md-0">
+                  <li className="nav-item">
+                    <a className="nav-link" aria-current="page" href="/#">
+                      Inicio
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/#">
+                      Opción 1
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/#">
+                      Opción 2
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/#">
+                      Opción 3
+                    </a>
+                  </li>
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="/#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Menú desplegable
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <a className="dropdown-item" href="/#">
+                          Otra opción 1
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="/#">
+                          Otra opción 2
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="/#">
+                          Otra opción 3
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <Link to="/login">
+                <span className="navbar-text">Iniciar sesión</span>
+                </Link>
+                
+              </div>
+            </div>
+          </nav>
+        </header>
+        {/* Barra de navegación: Fin */}
+
+        <main>
+          {/* Carousel: Inicio */}
+          {/* *************************************************************** */}
+          <div id="myCarousel" className="carousel slide" data-bs-ride="carousel">
+            <div className="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="0"
+                className="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+                className=""
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+                className=""
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="3"
+                aria-label="Slide 4"
+                className=""
+              ></button>
+            </div>
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <img src={fondo01} alt="" />
+                <div className="container">
+                  <div className="carousel-caption">
+                    <h1>Nuestros productos</h1>
+                    <p>Directos del campo</p>
+                    <p>
+                      <a className="btn btn-sm btn-primary" href="/#">
+                        Más información
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="carousel-item">
+                <img src={fondo02} alt="" />
+                <div className="container">
+                  <div className="carousel-caption text-end">
+                    <h1>Medicina especializada</h1>
+                    <p>Tu vida es lo primero</p>
+                    <p>
+                      <a className="btn btn-sm btn-primary" href="/#">
+                        Más información
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="carousel-item">
+                <img src={fondo03} alt="" />
+                <div className="container">
+                  <div className="carousel-caption text-start">
+                    <h1>Tú mascota</h1>
+                    <p>Lo más importante para nosotros</p>
+                    <p>
+                      <a className="btn btn-sm btn-primary" href="/#">
+                        Más información
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="carousel-item">
+                <img src={fondo04} alt="" />
+                <div className="container">
+                  <div className="carousel-caption text-start">
+                    <h1>Mesa de ayuda</h1>
+                    <p>Estamos para ayudarte</p>
+                    <p>
+                      <a className="btn btn-sm btn-primary" href="/#">
+                        Más información
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide="prev"
+            >
+              <span
+                className="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide="next"
+            >
+              <span
+                className="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </div>
+          {/* *************************************************************** */}
+          {/* Carousel: Fin */}
+
+
+          {/* Cuerpo página principal: Inicio */}
+          {/* *************************************************************** */}
+          <div className="container marketing">
+            <div className="row">
+              <div className="col-lg-4">
+                <img
+                  src={quienesSomos}
+                  className="bd-placeholder-img rounded-circle"
+                  alt=""
+                  style={{width: "100px", height: "auto"}}
+                />
+
+                <h2 className="fw-normal">¿Quienes somos?</h2>
+                <p>Equipo multidisciplinario desarrollador de aplicaciones Web</p>
+                <p>
+                  <a className="btn btn-secondary" href="/#">
+                    Más detalles
+                  </a>
+                </p>
+              </div>
+              <div className="col-lg-4">
+                <img
+                  src={patrocinio}
+                  className="bd-placeholder-img rounded-circle"
+                  alt=""
+                  style={{width: "145px", height: "auto"}}
+                />
+
+                <h2 className="fw-normal">¿Nuestro patrocinio?</h2>
+                <p>
+                  Patronicados por Misión TIC 2022, operador Universidad industrial de Santander
+                </p>
+                <p>
+                  <a className="btn btn-secondary" href="/#">
+                    Más detalles
+                  </a>
+                </p>
+              </div>
+              <div className="col-lg-4">
+              <img
+                  src={tecnologias}
+                  className="bd-placeholder-img rounded-circle"
+                  alt=""
+                  style={{width: "170px", height: "auto"}}
+                />
+                <h2 className="fw-normal">¿Tecnologías?</h2>
+                <p>
+                  Desarrollo de aplicaciones Web: Mongo, Express, React y Node
+                </p>
+                <p>
+                  <a className="btn btn-secondary" href="/#">
+                    Más detalles
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <hr className="featurette-divider" />
+          </div>
+          {/* *************************************************************** */}
+          {/* Cuerpo página principal: Fin */}
+
+
+          {/* Footer: Inicio */}
+          {/* *************************************************************** */}
+          <div>
+            <footer className="container">
+              <p className="float-end">
+                <a href="/#">Inicio página</a>
+              </p>
+              <p>
+                © 2022 Nombre del equipo.<br />Grupo asignado:<br />Formador:<br />Tutor:<br />Mentor:
+              </p>
+            </footer>
+          </div>
+          {/* *************************************************************** */}
+          {/* Footer: Fin */}
+        </main>
+      </div>
+    );
+  };
+
+# Creación de componentes
+  src\app\vistas\publicas\InicioSesion.tsx
+
+  imports
+    import { Link } from "react-router-dom";
+    import logoReact from "../../../assets/image/logoReact.png";
+
+  export const InicioSesion = () => {
+    return (
+      <div>
+        <main>
+          <div className="container">
+            <section className="section register d-flex flex-column align-items-center justify-content-center py-4">
+              <div className="container">
+                <div className="row justify-content-center">
+                  <div className="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
+                    <div className="d-flex justify-content-center py-4">
+                      <Link
+                        to="/"
+                        className="logo d-flex align-items-center w-auto"
+                      >
+                        <img src={logoReact} alt="" />
+                        <span className="d-none d-lg-block">Mintic 2022</span>
+                      </Link>
+                    </div>
+
+                    <div className="card mb-3">
+                      <div className="card-body">
+                        <div className="pt-4 pb-2">
+                          <h5 className="card-title text-center pb-0 fs-4">
+                            Inicio de sesión
+                          </h5>
+                          <p className="text-center small">
+                            Credenciales requeridas
+                          </p>
+                        </div>
+
+                        <form className="row g-3 needs-validation" noValidate>
+                          <div className="col-12">
+                            <label htmlFor="yourUsername" className="form-label">
+                              Correo electrónico
+                            </label>
+                            <div className="input-group has-validation">
+                              <span
+                                className="input-group-text"
+                                id="inputGroupPrepend"
+                              >
+                                @
+                              </span>
+                              <input
+                                type="text"
+                                name="username"
+                                className="form-control"
+                                id="yourUsername"
+                                required
+                              />
+                              <div className="invalid-feedback">
+                                Please enter your username.
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="col-12">
+                            <label htmlFor="yourPassword" className="form-label">
+                              Contraseña
+                            </label>
+                            <input
+                              type="password"
+                              name="password"
+                              className="form-control"
+                              id="yourPassword"
+                              required
+                            />
+                            <div className="invalid-feedback">
+                              Please enter your password!
+                            </div>
+                          </div>
+
+                          <div className="col-12">
+                            <button
+                              className="btn btn-primary w-100"
+                              type="submit"
+                            >
+                              Iniciar sesión
+                            </button>
+                          </div>
+                          <div className="col-12">
+                            <p className="small mb-0">
+                              ¿No tienes cuenta?{" "}
+                              <Link to="/register">
+                                Clic aquí para crear una
+                              </Link>
+                            </p>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    );
+  };
+
+# Creación de componentes
+  src\app\vistas\compartidas\NoEncontrado.tsx
+
+  imports
+    import { useNavigate } from "react-router-dom";
+    import imagenNoEncontrado from "../../../assets/image/ops.png";
+
+  export const NoEncontrado = () => {
+    const regresar = useNavigate();
+    return (
+      <div>
+        <main>
+            <section className="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+              <h1>404</h1>
+              <h2>
+                El recurso que está solicitando <strong>NO</strong> existe
+              </h2>
+              <button onClick={() => regresar(-1)} className="btn btn-info">
+                Regresar
+              </button>
+              <img
+                src={imagenNoEncontrado}
+                className="img-fluid py-5"
+                alt="Page Not Found"
+              />
+            </section>
+        </main>
+      </div>
+    );
+  };
+
+# Creación de componentes
+  src\app\vistas\publicas\RegistroSesion.tsx
+
+  imports
+    import Form from "react-bootstrap/Form";
+    import { Link } from "react-router-dom";
+    import "react-toastify/dist/ReactToastify.css";
+    import logoReact from "../../../assets/image/logoReact.png";
+
+  export const RegistroSesion = () => {
+
+    return (
+      <div>
+        <main>
+          <div className="container">
+            <section className="section register d-flex flex-column align-items-center justify-content-center py-4">
+              <div className="container">
+                <div className="row justify-content-center">
+                  <div className="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
+                    <div className="d-flex justify-content-center py-4">
+                      <Link
+                        to="/"
+                        className="logo d-flex align-items-center w-auto"
+                      >
+                        <img src={logoReact} alt="" />
+                        <span className="d-none d-lg-block">Mintic 2022</span>
+                      </Link>
+                    </div>
+
+                    <div className="card mb-3">
+                      <div className="card-body">
+                        <div className="pt-4 pb-2">
+                          <h5 className="card-title text-center pb-0 fs-4">
+                            Crear cuenta
+                          </h5>
+                          <p className="text-center small">
+                            Complete la siguiente información personal
+                          </p>
+                        </div>
+
+                        <Form
+                          noValidate
+                          className="row g-3"
+                        >
+                          <div className="col-12">
+                            <Form.Group controlId="nombreUsuario">
+                              <Form.Label>Nombre completo</Form.Label>
+                              <Form.Control
+                                required
+                                type="text"
+                                name="nombreUsuario"
+                                className="form-control"
+                              />
+                              <Form.Control.Feedback type="invalid">
+                                Nombre es obligatorio
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </div>
+
+                          <div className="col-12">
+                            <Form.Group controlId="correoUsuario">
+                              <Form.Label>Correo electrónico</Form.Label>
+                              <div className="input-group has-validation">
+                                <span className="input-group-text">@</span>
+                                <Form.Control
+                                  required
+                                  type="email"
+                                  name="correoUsuario"
+                                  className="form-control"
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                  correo electrónico es obligatorio
+                                </Form.Control.Feedback>
+                              </div>
+                            </Form.Group>
+                          </div>
+
+                          <div className="col-12">
+                            <Form.Group controlId="claveUsuario">
+                              <Form.Label>Contraseña</Form.Label>
+                              <Form.Control
+                                required
+                                type="password"
+                                name="claveUsuario"
+                                className="form-control"
+                                minLength={4}
+                              />
+                              <Form.Control.Feedback type="invalid">
+                                Mínimo 4 caracteres
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </div>
+
+                          <div className="col-12">
+                            <Form.Group controlId="reClaveUsuario">
+                              <Form.Label>Confirmar contraseña</Form.Label>
+                              <Form.Control
+                                required
+                                type="password"
+                                name="reClaveUsuario"
+                                className="form-control"
+                              />
+                              <Form.Control.Feedback type="invalid">
+                                Contraseñas no coindicen
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </div>
+
+                          <div className="col-12">
+                            <button
+                              className="btn btn-primary w-100"
+                              type="submit"
+                            >
+                              Crear cuenta
+                            </button>
+                          </div>
+                          <div className="col-12">
+                            <p className="small mb-0">
+                              ¿Ya tienes una cuenta?{" "}
+                              <Link to="/login">Clic aquí</Link>
+                            </p>
+                          </div>
+                        </Form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+
+      </div>
+    );
+  };
+
+# Creación de src\app\utilidades\rutas\RuteoCompleto.tsx
+  Cargar las rutas en modo lazy
+
+  import { lazy } from "react";
+  import { Route, Routes } from "react-router-dom";
+
+
+
+  export const RuteoCompleto = () => {
+    return (
+      <Routes>
+
+      </Routes>
+    );
+  };
+
+# Inicio del ruteo en src\App.tsx
+  Suspenso
+
+  import { Suspense } from "react";
+  import { BrowserRouter } from "react-router-dom";
+  import "./App.css";
+  import { RuteoCompleto } from "./app/utilidades/rutas/RuteoCompleto";
+
+  const cargando = (
+    <div className="pt-3 text-center">
+      <div className="sk-spinner sk-spinner-pulse">cargando....</div>
+    </div>
+  );
+
+
+  function App() {
+    return (
+      <BrowserRouter>
+
+      </BrowserRouter>
+    );
+  }
+
+  export default App; 
+
+# Creación del archivo para conexion con los endpoints
+  src\app\utilidades\dominios\ApiBack.tsx
+
+  const ApiBack = {
+    URL: "http://localhost:3123",
+    CREAR_USUARIO : "/api/public/usuario/crear"
+  };
+
+  export default ApiBack;
+
+# El primer servicio público:
+  src\app\servicios\ServicioPublico.tsx
+
+  import ApiBack from "../utilidades/dominios/ApiBack";
+
+  class ServicioPublico {
+    
+  }
+
+  export default ServicioPublico;

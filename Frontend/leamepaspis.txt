@@ -1,0 +1,60 @@
+# Instalar librerías
+# ***********************************************************************
+npm i bootstrap
+npm i bootstrap-icons
+npm i @fortawesome/fontawesome-free
+npm i react-router-dom
+npm i react-bootstrap
+npm i js-sha512
+npm i react-toastify
+
+# Incluir en src\index.tsx
+# ***********************************************************************
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import './index.css';
+
+Estructura sugerida
+src
+	app
+		contenedores
+		modelos
+		servicios
+		utilidades
+			dominios
+			funciones
+			misHooks
+			rutas
+		vistas
+			compartidas
+			privadas
+				perfiles
+				usuarios
+				productos
+				citas
+			publicas
+	assets
+
+# Creacion del modelo para crear usuario src\app\modelos\CrearUsuario.tsx
+# ***********************************************************************
+
+# Creación de Hook para manejo de variables en formularios
+# ***********************************************************************
+src\app\utilidades\misHooks\useFormulario.tsx
+
+# Creación de componentes
+# ***********************************************************************
+src\app\vistas\publicas\Principal.tsx
+
+# Creación de componentes
+# ***********************************************************************
+src\app\vistas\publicas\InicioSesion.tsx
+
+
+
+
+
+
+

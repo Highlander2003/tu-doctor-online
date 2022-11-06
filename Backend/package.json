@@ -1,0 +1,36 @@
+{
+  "name": "backciclo4",
+  "version": "1.0.0",
+  "description": "backend del ciclo 4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon build/index.js",
+    "build": "tsc -w"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "backend",
+    "mintic"
+  ],
+  "author": "cesar forero",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/morgan": "^1.9.3",
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20"
+  }
+}

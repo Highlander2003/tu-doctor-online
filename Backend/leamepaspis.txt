@@ -1,0 +1,31 @@
+# creacion del package.json
+npm init
+
+# instalacion de librerias
+npm i cors
+npm i morgan
+npm i express
+npm i mongoose
+npm i bcryptjs
+npm i jsonwebtoken
+
+npm i dotenv --save-dev
+npm i nodemon --save-dev
+
+npm i @types/cors --save-dev
+npm i @types/morgan --save-dev
+npm i @types/express --save-dev
+npm i @types/jsonwebtoken --save-dev
+npm i @types/bcryptjs --save-dev
+
+# ahora incluimos typescript
+tsc --init
+
+#configurar tsconfig carpeta salida
+"outDir": "./build",     "outDir": "./build",
+
+#creacion de scripts para ejecutar el backend en el package.json
+"dev": "nodemon build/index.js",
+"build": "tsc -w"
+
+#vamos a crear las carpetas
